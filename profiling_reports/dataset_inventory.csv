@@ -1,0 +1,11 @@
+file_name,rows,columns,missing_cells,duplicate_rows,report_file,status
+downtime_reasons.csv,12,4,0,0,downtime_reasons_profile.html,Success
+machine_states.csv,1094,7,1679,0,machine_states_profile.html,Success
+machines.csv,3,8,0,0,machines_profile.html,Success
+part_master.csv,5,4,0,0,part_master_profile.html,Success
+production_events.csv,20693,8,19909,0,production_events_profile.html,Success
+reject_reasons.csv,5,2,0,0,reject_reasons_profile.html,Success
+shifts.csv,72,8,0,0,shifts_profile.html,Success
+telemetry_HOB-01.csv,80016,8,229,96,telemetry_HOB-01_profile.html,Success
+telemetry_HOB-02.csv,80737,8,220,97,telemetry_HOB-02_profile.html,Success
+telemetry_SHV-01.csv,80737,8,231,97,telemetry_SHV-01_profile.html,Success
