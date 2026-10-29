@@ -7,6 +7,10 @@ from telemetry_tool import load_telemetry, detect_anomalies
 from telemetry_tool.data_loader import SENSOR_COLUMNS
 
 
+BASE_DIR = Path(__file__).resolve().parent
+DEFAULT_DATA_DIR = BASE_DIR / "FutureFix_GearLine3_Dataset"
+
+
 def build_daily_averages(data: pd.DataFrame) -> pd.DataFrame:
     """Calculate daily average for each machine and sensor."""
     work = data.copy()
@@ -29,7 +33,7 @@ def main():
 
     parser.add_argument(
         "--data-dir",
-        default="data",
+        default=str(DEFAULT_DATA_DIR),
         help="Telemetry CSV file or directory",
     )
 

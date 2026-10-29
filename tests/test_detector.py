@@ -2,6 +2,7 @@ import pandas as pd
 
 from telemetry_tool import detect_anomalies
 from telemetry_tool.data_loader import SENSOR_COLUMNS
+from telemetry_tool.streaming import StreamingAnomalyDetector
 
 
 def make_test_data(n=120):
@@ -72,3 +73,19 @@ def test_extreme_pattern_is_flagged():
     )
 
     assert bool(result.iloc[-1]["is_anomaly"]) is True
+
+
+def test_streaming_detector_scores_and_records_row():
+    historical = make_test_data().iloc[:-1].copy()
+    incoming = make_test_data(n=2).iloc[-1].to_dict()
+
+    detector = StreamingAnomalyDetector(
+        contamination=0.03,
+        window=5,
+    ).fit(historical)
+
+    result = detector.score_row(incoming)
+
+    assert isinstance(result["is_anomaly"], bool)
+    assert isinstance(result["anomaly_score"], float)
+    assert len(detector.history["TEST-01"]) == detector.window

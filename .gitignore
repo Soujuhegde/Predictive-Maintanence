@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+AxD_AIML_Intern_Assignment.pdf

@@ -1,7 +1,7 @@
 
 from pathlib import Path
 import pandas as pd
-from ydata_profiling import ProfileReport
+from data_profiling import ProfileReport
 
 # Folder where this Python script is saved
 BASE_DIR = Path(__file__).resolve().parent

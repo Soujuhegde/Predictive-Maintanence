@@ -21,9 +21,13 @@ st.caption(
     "A flag is a review prompt, not proof of machine failure."
 )
 
+default_data_path = (
+    Path(__file__).resolve().parent / "FutureFix_GearLine3_Dataset"
+)
+
 data_path = st.sidebar.text_input(
     "Telemetry folder or CSV path",
-    value="data",
+    value=str(default_data_path),
 )
 
 contamination = st.sidebar.slider(
@@ -120,7 +124,7 @@ if not daily_machine.empty:
 
     st.plotly_chart(
         fig,
-        use_container_width=True,
+        width="stretch",
     )
 
 
@@ -128,7 +132,7 @@ st.subheader("Daily averages table")
 
 st.dataframe(
     daily_machine,
-    use_container_width=True,
+    width="stretch",
     height=220,
 )
 
@@ -154,7 +158,7 @@ st.caption(
 
 st.dataframe(
     raw_view,
-    use_container_width=True,
+    width="stretch",
     height=450,
 )
 
@@ -172,7 +176,7 @@ else:
             "anomaly_score",
             ascending=False,
         ),
-        use_container_width=True,
+        width="stretch",
         height=350,
     )
 

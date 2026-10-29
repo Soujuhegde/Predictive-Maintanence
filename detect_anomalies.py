@@ -59,13 +59,7 @@ for machine in machines:
         lower = q1 - 1.5 * iqr
         upper = q3 + 1.5 * iqr
 
-        # A constant sensor has no IQR-based spread to assess.
-        if iqr == 0:
-            flagged = (values < lower) | (values > upper)
-        else:
-            flagged = (values < lower) | (values > upper)
-
-        flagged = flagged.fillna(False)
+        flagged = ((values < lower) | (values > upper)).fillna(False)
 
         count = int(flagged.sum())
 
