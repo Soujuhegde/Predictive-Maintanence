@@ -46,6 +46,14 @@ To choose paths or model settings:
 The script writes model flags/scores, flagged rows, daily averages, and a
 per-machine summary to the output directory.
 
+## Generate profiling reports
+
+The HTML profiling reports are generated artifacts and are excluded from
+version control so they do not dominate GitHub's language statistics.
+Generate them locally when needed:
+
+    python generate_profiles.py
+
 ## Findings from the supplied data
 
 The following results are from running the Isolation Forest batch analysis
