@@ -10,7 +10,7 @@ from run_analysis import build_daily_averages
 
 
 st.set_page_config(
-    page_title="FutureFix Telemetry Monitor",
+    page_title="Machine Health Overview",
     layout="wide",
 )
 
@@ -42,14 +42,16 @@ st.markdown(
         --muted: #68756e;
         --line: #e4e1d8;
         --green: #567b67;
+        --green-dark: #3f624f;
         --green-soft: #edf3ee;
-        --amber: #a76e35;
+        --red: #b5473c;
     }
 
     .stApp {
         background: var(--page);
         color: var(--ink);
         font-family: Inter, "Segoe UI", sans-serif;
+        --primary-color: var(--green);
     }
 
     [data-testid="stHeader"] {
@@ -61,9 +63,93 @@ st.markdown(
         border-right: 1px solid var(--line);
     }
 
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-    [data-testid="stCaptionContainer"] {
-        color: var(--muted);
+    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+        color: var(--ink) !important;
+    }
+
+    [data-testid="stCaptionContainer"],
+    [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+        color: var(--muted) !important;
+    }
+
+    [data-testid="stSidebar"] input,
+    [data-testid="stSidebar"] [data-baseweb="input"],
+    [data-testid="stSidebar"] [data-baseweb="base-input"],
+    [data-testid="stSidebar"] [data-baseweb="select"] > div {
+        background-color: var(--surface) !important;
+        color: var(--ink) !important;
+        border-color: #c9c7bd !important;
+    }
+
+    [data-testid="stSidebar"] input::placeholder {
+        color: var(--muted) !important;
+        opacity: 1;
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="select"] *,
+    [data-testid="stSidebar"] [role="combobox"] {
+        color: var(--ink) !important;
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="select"] svg {
+        fill: var(--muted) !important;
+    }
+
+    [data-baseweb="popover"],
+    [data-baseweb="popover"] > div,
+    [data-baseweb="menu"],
+    [role="listbox"] {
+        background-color: var(--surface) !important;
+        color: var(--ink) !important;
+    }
+
+    [data-baseweb="popover"] [role="option"],
+    [role="listbox"] [role="option"] {
+        background-color: var(--surface) !important;
+        color: var(--ink) !important;
+    }
+
+    [data-baseweb="popover"] [role="option"]:hover,
+    [role="listbox"] [role="option"]:hover {
+        background-color: var(--green-soft) !important;
+        color: var(--ink) !important;
+    }
+
+    [data-baseweb="popover"] [aria-selected="true"],
+    [role="listbox"] [aria-selected="true"] {
+        background-color: var(--green-soft) !important;
+        color: var(--green-dark) !important;
+    }
+
+    [data-testid="stCheckbox"] label,
+    [data-testid="stCheckbox"] label p,
+    [data-testid="stCheckbox"] [data-testid="stMarkdownContainer"] p {
+        color: var(--ink) !important;
+    }
+
+    [data-testid="stCheckbox"] input {
+        accent-color: var(--green);
+    }
+
+    [data-testid="stSidebar"] input:focus,
+    [data-testid="stSidebar"] [data-baseweb="input"]:focus-within,
+    [data-testid="stSidebar"] [data-baseweb="select"] > div:focus-within {
+        border-color: var(--green) !important;
+        box-shadow: 0 0 0 1px var(--green) !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
+        background-color: var(--green) !important;
+        border-color: var(--green) !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] > div > div {
+        background-color: var(--green) !important;
     }
 
     .block-container {
@@ -118,10 +204,47 @@ st.markdown(
         color: var(--green);
     }
 
+    .stButton button,
     [data-testid="stDownloadButton"] button {
-        color: var(--green);
-        border-color: #b7c8bb;
-        background: var(--green-soft);
+        color: #ffffff !important;
+        border: 1px solid var(--green-dark) !important;
+        background: var(--green) !important;
+        font-weight: 600;
+    }
+
+    .stButton button:hover,
+    [data-testid="stDownloadButton"] button:hover {
+        color: #ffffff !important;
+        border-color: var(--green-dark) !important;
+        background: var(--green-dark) !important;
+    }
+
+    .stButton button:focus,
+    [data-testid="stDownloadButton"] button:focus {
+        box-shadow: 0 0 0 2px #cbd9ce !important;
+    }
+
+    .machine-status {
+        display: inline-block;
+        margin: 0.1rem 0 0.7rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .machine-status.review {
+        color: #8f302b;
+        background: #fae9e6;
+    }
+
+    .machine-status.clear {
+        color: #315b42;
+        background: #e6f0e8;
+    }
+
+    [data-testid="stAlert"][kind="error"] {
+        border-left-color: var(--red);
     }
 
     [data-testid="stDataFrame"] {
@@ -138,10 +261,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Gear Line 3")
+st.title("Machine Health Overview")
 st.caption(
-    "Telemetry overview  /  Exploratory anomaly detection. "
-    "A flag is a review prompt, not proof of machine failure."
+    "Monitor sensor readings and review unusual values. "
+    "A flag means a reading may need attention; it does not confirm a fault."
 )
 
 default_data_path = Path(__file__).resolve().parent / "FutureFix_GearLine3_Dataset"
@@ -152,14 +275,20 @@ with st.sidebar:
         "Telemetry folder or CSV path",
         value=str(default_data_path),
     )
-    contamination = st.slider(
-        "Expected anomaly fraction",
-        min_value=0.005,
-        max_value=0.10,
-        value=0.01,
-        step=0.005,
-        format="%.3f",
+    anomaly_percent = st.slider(
+        "Approximate share to flag for review",
+        min_value=0.5,
+        max_value=10.0,
+        value=1.0,
+        step=0.5,
+        format="%.1f%%",
+        help=(
+            "This sets roughly what percentage of readings the model marks "
+            "as unusual. A flag is not proof of a machine fault. "
+            "If unsure, leave it at 1%."
+        ),
     )
+    contamination = anomaly_percent / 100
     window = st.selectbox(
         "Rolling window (readings)",
         options=[3, 5, 10, 20],
@@ -284,17 +413,27 @@ with chart_column:
 with readout_column:
     with st.container(border=True):
         st.subheader("Review")
+        if alerts.empty:
+            st.markdown(
+                '<div class="machine-status clear">No model flags</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                '<div class="machine-status review">Review flagged readings</div>',
+                unsafe_allow_html=True,
+            )
         st.metric("Flagged readings", f"{len(alerts):,}")
         st.metric("Share of machine readings", f"{alert_rate:.2f}%")
         st.markdown("---")
         st.caption(
-            "Flags are relative outliers from the selected model settings. "
-            "Review them alongside operating context before drawing conclusions."
+            "Flagged readings are unusual compared with the model's baseline. "
+            "Check machine conditions before deciding whether action is needed."
         )
 
 st.write("")
 daily_tab, readings_tab, flagged_tab = st.tabs(
-    ["Daily averages", "Telemetry readings", "Flagged readings"]
+    ["Daily averages", "Machine readings", "Flagged readings"]
 )
 
 with daily_tab:
@@ -307,9 +446,9 @@ with daily_tab:
     )
 
 with readings_tab:
-    st.subheader("Telemetry readings")
+    st.subheader("Machine readings")
     only_anomalies = st.checkbox(
-        "Show only model-flagged readings",
+        "Show flagged readings only",
         value=False,
     )
     raw_view = alerts if only_anomalies else machine_results

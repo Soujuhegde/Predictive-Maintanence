@@ -7,18 +7,19 @@ replay.
 
 ## Dataset
 
-The supplied telemetry is in `FutureFix_GearLine3_Dataset/`:
+The telemetry data is not included in this repository. To run the analysis,
+place the provided CSV files in a local `FutureFix_GearLine3_Dataset/` folder:
 
 - `telemetry_HOB-01.csv`
 - `telemetry_HOB-02.csv`
 - `telemetry_SHV-01.csv`
 
-Each file contains timestamps, a machine ID, spindle speed/load/current,
-motor temperature, vibration, and coolant flow. These files contain three
-machines and do not have the assignment brief's separate `Hob_1` /
+Each telemetry file contains timestamps, a machine ID, spindle
+speed/load/current, motor temperature, vibration, and coolant flow. These
+files contain three machines and do not have the assignment brief's separate `Hob_1` /
 `Hob_2` files or axis-specific X/Z/V current and temperature columns. This
-analysis uses the dataset present in this repository; its signals should not
-be described as axis-specific measurements.
+analysis uses the dataset supplied locally; its signals should not be
+described as axis-specific measurements.
 
 `spindle_current_a == -999` is treated as missing because it is a special
 value in the supplied files; its meaning should be confirmed with the data
@@ -35,7 +36,7 @@ Use Python 3.10 or later. From the repository root:
 
 ## Run analysis
 
-The checked-in dataset is the default:
+If the dataset folder is in the repository root, it is used by default:
 
     python run_analysis.py
 
