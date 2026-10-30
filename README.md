@@ -107,9 +107,11 @@ state-specific baselines against engineering limits and maintenance outcomes.
 
     streamlit run dashboard.py
 
-The dashboard displays per-machine daily sensor averages, a scrollable raw
-data table, anomaly flags, and a CSV download option. The selected sensor and
-machine can be changed in the sidebar.
+The dashboard uses an off-white operations view with a daily sensor trend,
+machine-level review summary, and separate tabs for daily averages, telemetry
+readings, and flagged readings. The selected sensor, machine, and model settings
+can be changed in the sidebar; visible telemetry readings can be downloaded as
+CSV.
 
 ## Simulate IoT replay
 
